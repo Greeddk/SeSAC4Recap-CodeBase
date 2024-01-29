@@ -16,11 +16,11 @@ class SetProfileViewController: UIViewController {
     let udManager = UserDefaultsManager.shared
     let userState = UserDefaultsManager.shared.userState
     
-    var roundedProfileImage = UIImageView()
-    var camLogoImage = UIImageView()
-    var nicknameTextField = HoshiTextField()
-    var nickInfoLabel = UILabel()
-    var submitButton = UIButton()
+    let roundedProfileImage = RoundImageView(frame: .zero)
+    let camLogoImage = UIImageView()
+    let nicknameTextField = HoshiTextField()
+    let nickInfoLabel = UILabel()
+    let submitButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class SetProfileViewController: UIViewController {
 }
 
 extension SetProfileViewController: CodeBaseProtocol {
+    
     func configureHierarchy() {
         view.addSubview(roundedProfileImage)
         view.addSubview(camLogoImage)
@@ -57,15 +58,12 @@ extension SetProfileViewController: CodeBaseProtocol {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureTapped))
         roundedProfileImage.addGestureRecognizer(tapGesture)
         roundedProfileImage.isUserInteractionEnabled = true
-        roundedProfileImage.clipsToBounds = true
-        DispatchQueue.main.async {
-            self.roundedProfileImage.setRoundProfileImage(isBorder: true)
-        }
+        roundedProfileImage.setRoundProfileImage(isBorder: true)
+
         
         camLogoImage.image = .camera
         
         nicknameTextField.delegate = self
-        
         nicknameTextField.placeholder = "닉네임을 입력해주세요 :)"
         nicknameTextField.placeholderFontScale = 1.1
         nicknameTextField.borderActiveColor = .point
@@ -113,8 +111,7 @@ extension SetProfileViewController: CodeBaseProtocol {
             make.height.equalTo(50)
         }
     }
-    
-    
+
 }
 
 extension SetProfileViewController {
@@ -138,19 +135,14 @@ extension SetProfileViewController {
     
     @objc func tapGestureTapped() {
         
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: SelectProfileViewController.identifier) as! SelectProfileViewController
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(SelectProfileViewController(), animated: true)
        
     }
 
     @objc private func submitButtonClicked() {
         
         if isValidated {
-            
-            nickInfoLabel.text = "사용할 수 있는 닉네임입니다"
-            nickInfoLabel.textColor = .point
-            
+
             udManager.nickname = nicknameTextField.text!
             udManager.userState = true
             
@@ -198,7 +190,8 @@ extension SetProfileViewController: UITextFieldDelegate {
             nickInfoLabel.textColor = .red
             isValidated = false
         } else {
-            nickInfoLabel.text = nil
+            nickInfoLabel.text = "사용할 수 있는 닉네임입니다"
+            nickInfoLabel.textColor = .point
             isValidated = true
         }
         

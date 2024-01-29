@@ -15,10 +15,10 @@
 		42346DC72B5BFA3D0001B988 /* SettingOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42346DC52B5BFA3D0001B988 /* SettingOptionTableViewCell.xib */; };
 		42346DC92B5CBC910001B988 /* SelectProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42346DC82B5CBC910001B988 /* SelectProfileViewController.swift */; };
 		42346DCD2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42346DCB2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift */; };
-		42346DCE2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42346DCC2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib */; };
 		42826B032B678813004CC8F3 /* CodeBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42826B022B678813004CC8F3 /* CodeBaseProtocol.swift */; };
 		42826B062B6788CE004CC8F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42826B052B6788CE004CC8F3 /* SnapKit */; };
 		42826B082B6788CE004CC8F3 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 42826B072B6788CE004CC8F3 /* SnapKit-Dynamic */; };
+		42826B0B2B6795B6004CC8F3 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42826B0A2B6795B6004CC8F3 /* RoundImageView.swift */; };
 		42A570F22B5906C30070AFB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A570F12B5906C30070AFB4 /* AppDelegate.swift */; };
 		42A570F42B5906C30070AFB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A570F32B5906C30070AFB4 /* SceneDelegate.swift */; };
 		42A570F62B5906C30070AFB4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A570F52B5906C30070AFB4 /* OnboardingViewController.swift */; };
@@ -61,8 +61,8 @@
 		42346DC52B5BFA3D0001B988 /* SettingOptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingOptionTableViewCell.xib; sourceTree = "<group>"; };
 		42346DC82B5CBC910001B988 /* SelectProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileViewController.swift; sourceTree = "<group>"; };
 		42346DCB2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileCollectionViewCell.swift; sourceTree = "<group>"; };
-		42346DCC2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		42826B022B678813004CC8F3 /* CodeBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBaseProtocol.swift; sourceTree = "<group>"; };
+		42826B0A2B6795B6004CC8F3 /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		42A570EE2B5906C30070AFB4 /* SeSAC4Recap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC4Recap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A570F12B5906C30070AFB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42A570F32B5906C30070AFB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,9 +128,16 @@
 			children = (
 				42346DC82B5CBC910001B988 /* SelectProfileViewController.swift */,
 				42346DCB2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift */,
-				42346DCC2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib */,
 			);
 			path = SelectProfileView;
+			sourceTree = "<group>";
+		};
+		42826B092B679565004CC8F3 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				42826B0A2B6795B6004CC8F3 /* RoundImageView.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		42A570E52B5906C30070AFB4 = {
@@ -158,6 +165,7 @@
 				42A571352B5A2FF30070AFB4 /* Resource */,
 				42A5712D2B59F4120070AFB4 /* String */,
 				42A5711F2B593F120070AFB4 /* Manager */,
+				42826B092B679565004CC8F3 /* CustomView */,
 				42A570F52B5906C30070AFB4 /* OnboardingViewController.swift */,
 				42A5710C2B59154F0070AFB4 /* SetProfileViewController.swift */,
 				42346DCA2B5CBEAF0001B988 /* SelectProfileView */,
@@ -324,7 +332,6 @@
 				42A5713B2B5A37F90070AFB4 /* MainKeywordTableViewCell.xib in Resources */,
 				42A5714D2B5A67830070AFB4 /* SearchResultCollectionViewCell.xib in Resources */,
 				42A571432B5A612F0070AFB4 /* .gitignore in Resources */,
-				42346DCE2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib in Resources */,
 				42A570F92B5906C30070AFB4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +363,7 @@
 				42A570F42B5906C30070AFB4 /* SceneDelegate.swift in Sources */,
 				42A571212B593F280070AFB4 /* UserDefaultsManager.swift in Sources */,
 				42A5713F2B5A60860070AFB4 /* NaverAPIManager.swift in Sources */,
+				42826B0B2B6795B6004CC8F3 /* RoundImageView.swift in Sources */,
 				42A571252B59472D0070AFB4 /* MainImageTableViewCell.swift in Sources */,
 				42346DBE2B5BE5AD0001B988 /* SettingViewController.swift in Sources */,
 				42A5713D2B5A5BAE0070AFB4 /* SearchResultViewController.swift in Sources */,

@@ -6,26 +6,40 @@
 //
 
 import UIKit
+import SnapKit
 
 class SelectProfileCollectionViewCell: UICollectionViewCell {
-
-    @IBOutlet var profileImage: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    let profileImage = RoundImageView(frame: .zero)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        DispatchQueue.main.async {
-            self.setUI()
-        }
-        
+        configureHierarchy()
+        configureLayout()
+        configureView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
 
-extension SelectProfileCollectionViewCell {
+extension SelectProfileCollectionViewCell: CodeBaseProtocol {
     
-    private func setUI() {
-        profileImage.layer.cornerRadius = profileImage.frame.width / 2
+    func configureHierarchy() {
+        contentView.addSubview(profileImage)
+    }
+    
+    func configureView() {
+        
+    }
+    
+    func configureLayout() {
+        profileImage.snp.makeConstraints { make in
+            make.edges.equalTo(contentView.safeAreaLayoutGuide)
+        }
     }
     
     func configureCell(image: String, isBorder: Bool) {

@@ -176,10 +176,6 @@
                             <constraint firstItem="Mtz-xg-mzx" firstAttribute="centerX" secondItem="QZb-m9-iA4" secondAttribute="centerX" id="soB-qp-tJs"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="currentProfileImageView" destination="Mtz-xg-mzx" id="rmd-vi-G3K"/>
-                        <outlet property="profileCollectionView" destination="36Z-Do-Gl2" id="bQF-MU-xqq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bUW-TI-veE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
