@@ -124,13 +124,6 @@
                             <constraint firstItem="lKI-0h-qqh" firstAttribute="trailing" secondItem="dOS-3U-vY8" secondAttribute="trailing" constant="20" id="yoK-Ek-seP"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="camLogoImage" destination="jPM-jE-t14" id="yrF-RQ-IKu"/>
-                        <outlet property="nickInfoLabel" destination="1tm-Ua-s3I" id="6NN-Bv-r1f"/>
-                        <outlet property="nicknameTextField" destination="dOS-3U-vY8" id="Ku7-dy-w6S"/>
-                        <outlet property="roundedProfileImage" destination="Uvg-NB-RVO" id="1ZF-O1-ZvR"/>
-                        <outlet property="submitButton" destination="FKa-yc-ViI" id="tf6-ER-HfC"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5I-RT-UAX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -71,11 +71,8 @@ extension OnboardingViewController: CodeBaseProtocol {
 extension OnboardingViewController {
     
     @objc private func startButtonClicked() {
-        
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: SetProfileViewController.identifier) as! SetProfileViewController
 
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(SetProfileViewController(), animated: true)
     }
 }
 
