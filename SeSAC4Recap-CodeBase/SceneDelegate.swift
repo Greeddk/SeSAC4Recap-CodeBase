@@ -22,12 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if !value {
             
-            let sb = UIStoryboard(name: storyboardName.main.rawValue, bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.identifier) as! OnboardingViewController
-            
-            let nav = UINavigationController(rootViewController: vc)
-            
-            window?.rootViewController = nav
+            window?.rootViewController = UINavigationController(rootViewController: OnboardingViewController()) 
             
             window?.makeKeyAndVisible()
             

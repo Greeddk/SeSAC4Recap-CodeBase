@@ -16,6 +16,9 @@
 		42346DC92B5CBC910001B988 /* SelectProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42346DC82B5CBC910001B988 /* SelectProfileViewController.swift */; };
 		42346DCD2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42346DCB2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift */; };
 		42346DCE2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42346DCC2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib */; };
+		42826B032B678813004CC8F3 /* CodeBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42826B022B678813004CC8F3 /* CodeBaseProtocol.swift */; };
+		42826B062B6788CE004CC8F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42826B052B6788CE004CC8F3 /* SnapKit */; };
+		42826B082B6788CE004CC8F3 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 42826B072B6788CE004CC8F3 /* SnapKit-Dynamic */; };
 		42A570F22B5906C30070AFB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A570F12B5906C30070AFB4 /* AppDelegate.swift */; };
 		42A570F42B5906C30070AFB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A570F32B5906C30070AFB4 /* SceneDelegate.swift */; };
 		42A570F62B5906C30070AFB4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A570F52B5906C30070AFB4 /* OnboardingViewController.swift */; };
@@ -59,6 +62,7 @@
 		42346DC82B5CBC910001B988 /* SelectProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileViewController.swift; sourceTree = "<group>"; };
 		42346DCB2B5CC06A0001B988 /* SelectProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		42346DCC2B5CC06A0001B988 /* SelectProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectProfileCollectionViewCell.xib; sourceTree = "<group>"; };
+		42826B022B678813004CC8F3 /* CodeBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBaseProtocol.swift; sourceTree = "<group>"; };
 		42A570EE2B5906C30070AFB4 /* SeSAC4Recap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC4Recap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A570F12B5906C30070AFB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42A570F32B5906C30070AFB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +100,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42826B082B6788CE004CC8F3 /* SnapKit-Dynamic in Frameworks */,
 				42A571182B5917E90070AFB4 /* TextFieldEffects in Frameworks */,
+				42826B062B6788CE004CC8F3 /* SnapKit in Frameworks */,
 				42A571122B5917D80070AFB4 /* Kingfisher in Frameworks */,
 				42A571152B5917DF0070AFB4 /* Alamofire in Frameworks */,
 			);
@@ -216,6 +222,7 @@
 			children = (
 				42A571362B5A30030070AFB4 /* ReusableProtocol.swift */,
 				42A571442B5A61460070AFB4 /* APIKey.swift */,
+				42826B022B678813004CC8F3 /* CodeBaseProtocol.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -258,6 +265,8 @@
 				42A571112B5917D80070AFB4 /* Kingfisher */,
 				42A571142B5917DF0070AFB4 /* Alamofire */,
 				42A571172B5917E90070AFB4 /* TextFieldEffects */,
+				42826B052B6788CE004CC8F3 /* SnapKit */,
+				42826B072B6788CE004CC8F3 /* SnapKit-Dynamic */,
 			);
 			productName = SeSAC4Recap;
 			productReference = 42A570EE2B5906C30070AFB4 /* SeSAC4Recap.app */;
@@ -291,6 +300,7 @@
 				42A571102B5917D80070AFB4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				42A571132B5917DF0070AFB4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				42A571162B5917E90070AFB4 /* XCRemoteSwiftPackageReference "TextFieldEffects" */,
+				42826B042B6788CE004CC8F3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 42A570EF2B5906C30070AFB4 /* Products */;
 			projectDirPath = "";
@@ -351,6 +361,7 @@
 				42A5713D2B5A5BAE0070AFB4 /* SearchResultViewController.swift in Sources */,
 				42A571072B590B740070AFB4 /* UIColor+Extension.swift in Sources */,
 				42A5710B2B59102C0070AFB4 /* UIButton+Extension.swift in Sources */,
+				42826B032B678813004CC8F3 /* CodeBaseProtocol.swift in Sources */,
 				42346DC92B5CBC910001B988 /* SelectProfileViewController.swift in Sources */,
 				42A5711E2B593C790070AFB4 /* MainViewController.swift in Sources */,
 			);
@@ -587,6 +598,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		42826B042B6788CE004CC8F3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.0;
+			};
+		};
 		42A571102B5917D80070AFB4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -614,6 +633,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		42826B052B6788CE004CC8F3 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42826B042B6788CE004CC8F3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		42826B072B6788CE004CC8F3 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42826B042B6788CE004CC8F3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
 		42A571112B5917D80070AFB4 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 42A571102B5917D80070AFB4 /* XCRemoteSwiftPackageReference "Kingfisher" */;

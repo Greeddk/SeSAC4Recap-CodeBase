@@ -55,11 +55,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PRZ-O7-nYN"/>
-                    <connections>
-                        <outlet property="appTitleImage" destination="j0B-UT-vh6" id="JcA-Oy-wKp"/>
-                        <outlet property="logoImage" destination="LeI-Qh-nOf" id="nGy-v9-3jn"/>
-                        <outlet property="startButton" destination="bqX-cf-oo3" id="Cfl-o3-KaU"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
