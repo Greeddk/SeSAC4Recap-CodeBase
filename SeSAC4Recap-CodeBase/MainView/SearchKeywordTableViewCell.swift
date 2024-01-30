@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainKeywordTableViewCell: UITableViewCell {
+class SearchKeywordTableViewCell: UITableViewCell {
     
     let searchImageView = UIImageView(frame: .zero)
     let searchedKeyword = UILabel()
@@ -29,7 +29,7 @@ class MainKeywordTableViewCell: UITableViewCell {
     
 }
 
-extension MainKeywordTableViewCell: CodeBaseProtocol {
+extension SearchKeywordTableViewCell: CodeBaseProtocol {
     
     func configureHierarchy() {
         contentView.addSubview(searchImageView)
@@ -66,7 +66,7 @@ extension MainKeywordTableViewCell: CodeBaseProtocol {
         deleteButton.snp.makeConstraints { make in
             make.size.equalTo(16)
             make.leading.greaterThanOrEqualTo(searchedKeyword.snp.trailing).offset(140)
-            make.trailing.equalTo(contentView).offset(10)
+            make.trailing.equalTo(contentView).offset(-10)
             make.centerY.equalTo(contentView)
         }
     }

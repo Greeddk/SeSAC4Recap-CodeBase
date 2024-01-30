@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     let userSearchBar = UISearchBar()
     let headerBackView = UIView()
@@ -51,7 +51,9 @@ class MainViewController: UIViewController {
     @objc private func deleteButtonClicked(sender: UIButton) {
         
         var list = searchKeywords
+        list.reverse()
         list.remove(at: sender.tag)
+        list.reverse()
         udManager.searchList = list
         searchKeywords = udManager.searchList
         
@@ -59,7 +61,7 @@ class MainViewController: UIViewController {
     
 }
 
-extension MainViewController: CodeBaseProtocol {
+extension SearchViewController: CodeBaseProtocol {
     
     func configureHierarchy() {
         view.addSubviews([userSearchBar, headerBackView, searchTableView])
@@ -84,16 +86,6 @@ extension MainViewController: CodeBaseProtocol {
         
         userSearchBar.text = ""
         
-        if searchKeywords.isEmpty {
-            
-            headerLabel.textColor = .textColor
-            allClearButton.setTitleColor(.point, for: .normal)
-
-        } else {
-            
-            headerLabel.textColor = .backgroundColor
-            allClearButton.setTitleColor(.backgroundColor, for: .normal)
-        }
     }
     
     func configureLayout() {
@@ -131,6 +123,7 @@ extension MainViewController: CodeBaseProtocol {
     
     private func setSearchBar() {
         
+        userSearchBar.delegate = self
         userSearchBar.barTintColor = .clear
         userSearchBar.searchTextField.leftView?.tintColor = .lightGray
         userSearchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "브랜드, 상품, 프로필, 태그 등", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
@@ -145,13 +138,13 @@ extension MainViewController: CodeBaseProtocol {
         searchTableView.dataSource = self
         searchTableView.backgroundColor = .clear
         
-        searchTableView.register(MainImageTableViewCell.self, forCellReuseIdentifier: MainImageTableViewCell.identifier)
+        searchTableView.register(SearchImageTableViewCell.self, forCellReuseIdentifier: SearchImageTableViewCell.identifier)
      
-        searchTableView.register(MainKeywordTableViewCell.self, forCellReuseIdentifier: MainKeywordTableViewCell.identifier)
+        searchTableView.register(SearchKeywordTableViewCell.self, forCellReuseIdentifier: SearchKeywordTableViewCell.identifier)
     }
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchKeywords.count != 0 ? searchKeywords.count : 1
@@ -168,7 +161,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             allClearButton.setTitleColor(.backgroundColor, for: .normal)
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainImageTableViewCell.identifier) as! MainImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SearchImageTableViewCell.identifier) as! SearchImageTableViewCell
             
             return cell
             
@@ -181,7 +174,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             allClearButton.setTitleColor(.point, for: .normal)
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainKeywordTableViewCell.identifier, for: indexPath) as! MainKeywordTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SearchKeywordTableViewCell.identifier, for: indexPath) as! SearchKeywordTableViewCell
             
             var list = searchKeywords
             list.reverse()
@@ -217,28 +210,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         udManager.searchKeyword = text
         
         let vc = SearchResultViewController()
-        vc.configureNavigationBar(text: text)
-        
+        vc.setNavigation(text: text, backButton: true)
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+
         guard let text = searchBar.text, !text.isEmpty else { return }
 
         searchKeywords.append(text)
         udManager.searchList = searchKeywords
         udManager.searchKeyword = text
         
-        SearchResultViewController().configureNavigationBar(text: text)
-        
-        let sb = UIStoryboard(name: "main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier)
+        let vc = SearchResultViewController()
+        vc.setNavigation(text: text, backButton: true)
         navigationController?.pushViewController(vc, animated: true)
         
     }

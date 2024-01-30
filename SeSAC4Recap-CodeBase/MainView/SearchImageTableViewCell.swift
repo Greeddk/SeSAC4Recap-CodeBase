@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainImageTableViewCell: UITableViewCell {
+class SearchImageTableViewCell: UITableViewCell {
 
     let mainImageView = UIImageView(frame: .zero)
     let infoLabel = UILabel()
@@ -27,7 +27,7 @@ class MainImageTableViewCell: UITableViewCell {
     
 }
 
-extension MainImageTableViewCell: CodeBaseProtocol {
+extension SearchImageTableViewCell: CodeBaseProtocol {
     
     func configureHierarchy() {
         contentView.addSubview(mainImageView)

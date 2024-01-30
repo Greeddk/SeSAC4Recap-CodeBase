@@ -12,7 +12,7 @@ class ProductDetailViewController: UIViewController {
     
     @IBOutlet var productDetailWebView: WKWebView!
     
-    var item: Item = Item(title: "", link: "", image: "", lprice: "", productId: "", mallName: "")
+    var item: ShoppingItem = ShoppingItem(title: "", link: "", image: "", lprice: "", productId: "", mallName: "")
     
     let udManager = UserDefaultsManager.shared
     let favoriteList = UserDefaultsManager.shared.favoriteList

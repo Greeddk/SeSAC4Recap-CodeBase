@@ -7,35 +7,44 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class SearchResultCollectionViewCell: UICollectionViewCell {
     
-    
-    @IBOutlet var itemImageView: UIImageView!
-    @IBOutlet var favoriteButton: UIButton!
-    @IBOutlet var shoppingmallLabel: UILabel!
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var priceLabel: UILabel!
+    let itemImageView = UIImageView()
+    let favoriteButton = UIButton()
+    let shoppingmallLabel = UILabel()
+    let nameLabel = UILabel()
+    let priceLabel = UILabel()
     
     let udManager = UserDefaultsManager.shared
     var favoriteList = UserDefaultsManager.shared.favoriteList
     
     var productID = ""
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        setUI()
+        configureHierarchy()
+        configureView()
+        configureLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
 
-extension SearchResultCollectionViewCell {
+extension SearchResultCollectionViewCell: CodeBaseProtocol {
+    func configureHierarchy() {
+        contentView.addSubviews([itemImageView, favoriteButton, shoppingmallLabel, nameLabel, priceLabel])
+    }
     
-    private func setUI() {
-        
+    func configureView() {
         backgroundColor = .clear
         
+        itemImageView.clipsToBounds = true
         itemImageView.layer.cornerRadius = 10
         itemImageView.contentMode = .scaleToFill
         
@@ -51,13 +60,42 @@ extension SearchResultCollectionViewCell {
         
         favoriteButton.setTitle("", for: .normal)
         favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        
         favoriteButton.tintColor = .backgroundColor
         favoriteButton.backgroundColor = .textColor
-        favoriteButton.layer.cornerRadius = favoriteButton.frame.width / 2
     }
     
-    func configureCell(item: Item) {
+    func configureLayout() {
+        itemImageView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
+            make.height.equalTo(175)
+        }
+        
+        favoriteButton.snp.makeConstraints { make in
+            make.size.equalTo(32)
+            make.trailing.equalTo(itemImageView.snp.trailing).offset(-10)
+            make.bottom.equalTo(itemImageView.snp.bottom).offset(-10)
+        }
+        
+        shoppingmallLabel.snp.makeConstraints { make in
+            make.top.equalTo(itemImageView.snp.bottom).offset(2)
+            make.leading.equalTo(contentView).offset(10)
+            make.height.equalTo(16)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(shoppingmallLabel.snp.bottom).offset(4)
+            make.horizontalEdges.equalTo(contentView).inset(10)
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(4)
+            make.leading.equalTo(contentView).offset(10)
+            make.trailing.greaterThanOrEqualTo(contentView).offset(4)
+            make.height.equalTo(22)
+        }
+    }
+    
+    func configureCell(item: ShoppingItem) {
         
         let url = URL(string: item.image)
         itemImageView.kf.setImage(with: url)

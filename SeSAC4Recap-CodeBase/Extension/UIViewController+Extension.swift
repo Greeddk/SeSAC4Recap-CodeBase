@@ -15,12 +15,11 @@ extension UIViewController {
     
     func setNavigation(text: String, backButton: Bool) {
         
+        navigationItem.setHidesBackButton(true, animated: true)
         navigationItem.title = text
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.textColor]
         navigationController?.navigationBar.backgroundColor = .backgroundColor
-        
-        navigationItem.setHidesBackButton(true, animated: true)
-        
+
         if backButton {
             let image = UIImage(systemName: "chevron.left")
             let backButton = UIBarButtonItem(image: image, style: .plain, target: self, action:  #selector(backButtonClicked))

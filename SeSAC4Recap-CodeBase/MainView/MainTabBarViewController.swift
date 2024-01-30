@@ -12,7 +12,7 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let searchVC = UINavigationController(rootViewController: MainViewController())
+        let searchVC = UINavigationController(rootViewController: SearchViewController())
         let settingVC = UINavigationController(rootViewController: SettingViewController())
         
         searchVC.tabBarItem.image = UIImage(systemName: "magnifyingglass")

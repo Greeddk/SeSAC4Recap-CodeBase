@@ -25,14 +25,12 @@ class SearchResultViewController: UIViewController {
     
     var sort = SearchSort.sim.rawValue
     
-    @IBOutlet var numberOfResultLabel: UILabel!
-    
-    @IBOutlet var accurateFilterButton: UIButton!
-    @IBOutlet var dateFilterButton: UIButton!
-    @IBOutlet var highPriceFilterButton: UIButton!
-    @IBOutlet var lowPriceFilterButton: UIButton!
-    
-    @IBOutlet var searchResultCollectionView: UICollectionView!
+    let numberOfResultLabel = UILabel()
+    let accurateFilterButton = UIButton()
+    let dateFilterButton = UIButton()
+    let highPriceFilterButton = UIButton()
+    let lowPriceFilterButton = UIButton()
+    lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
     let searchManager = NaverAPIManager()
     let udManager = UserDefaultsManager.shared
@@ -54,8 +52,9 @@ class SearchResultViewController: UIViewController {
         
         callAPI()
         
-        setUI()
-        configureCollectionView()
+        configureHierarchy()
+        configureLayout()
+        configureView()
         
     }
     
@@ -66,7 +65,7 @@ class SearchResultViewController: UIViewController {
     }
     
     
-    @IBAction func accurateFilterClicked(_ sender: UIButton) {
+    @objc func accurateFilterClicked(_ sender: UIButton) {
         
         sort = SearchSort.sim.rawValue
         callAPI()
@@ -77,7 +76,7 @@ class SearchResultViewController: UIViewController {
         configureNormalFilterButton(button: lowPriceFilterButton, text: "가격낮은순")
     }
     
-    @IBAction func dateFilterClicked(_ sender: UIButton) {
+    @objc func dateFilterClicked(_ sender: UIButton) {
         
         sort = SearchSort.date.rawValue
         callAPI()
@@ -88,7 +87,7 @@ class SearchResultViewController: UIViewController {
         configureNormalFilterButton(button: lowPriceFilterButton, text: "가격낮은순")
     }
     
-    @IBAction func highpriceFilterClicked(_ sender: UIButton) {
+    @objc func highpriceFilterClicked(_ sender: UIButton) {
         
         sort = SearchSort.dsc.rawValue
         callAPI()
@@ -99,7 +98,7 @@ class SearchResultViewController: UIViewController {
         configureNormalFilterButton(button: lowPriceFilterButton, text: "가격낮은순")
     }
     
-    @IBAction func lowpriceFilterClicked(_ sender: UIButton) {
+    @objc func lowpriceFilterClicked(_ sender: UIButton) {
         
         sort = SearchSort.asc.rawValue
         callAPI()
@@ -113,10 +112,7 @@ class SearchResultViewController: UIViewController {
     func callAPI() {
         
         let text = udManager.searchKeyword
-        //이 코드는 왜 안될까요..? completionhandler가 단순히 파라미터가 아니라 escaping 과 관련이 있어서 그런걸까요?
-        //        searchManager.callRequest(text: list.last!, completionhandler: { value in
-        //            self.shoppingList = value
-        //        })
+
         page = 0
         searchManager.callRequest(text: text, page: page, sort: sort) { value in
             
@@ -130,10 +126,13 @@ class SearchResultViewController: UIViewController {
     
 }
 
-extension SearchResultViewController {
+extension SearchResultViewController: CodeBaseProtocol {
     
-    func setUI() {
-        
+    func configureHierarchy() {
+        view.addSubviews([numberOfResultLabel, dateFilterButton, accurateFilterButton, lowPriceFilterButton, highPriceFilterButton, searchResultCollectionView])
+    }
+    
+    func configureView() {
         setBackgroundColor()
         
         numberOfResultLabel.textColor = .point
@@ -143,14 +142,6 @@ extension SearchResultViewController {
         configureNormalFilterButton(button: dateFilterButton, text: "날짜순")
         configureNormalFilterButton(button: highPriceFilterButton, text: "가격높은순")
         configureNormalFilterButton(button: lowPriceFilterButton, text: "가격낮은순")
-    }
-    
-    func configureNavigationBar(text: String) {
-        
-        setNavigation(text: text, backButton: true)
-    }
-    
-    func configureCollectionView() {
         
         searchResultCollectionView.dataSource = self
         searchResultCollectionView.delegate = self
@@ -158,8 +149,54 @@ extension SearchResultViewController {
         
         searchResultCollectionView.backgroundColor = .clear
         
-        let xib = UINib(nibName: SearchResultCollectionViewCell.identifier, bundle: nil)
-        searchResultCollectionView.register(xib, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        searchResultCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        
+    }
+    
+    func configureLayout() {
+        numberOfResultLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
+            make.height.equalTo(20)
+        }
+        
+        accurateFilterButton.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
+            make.top.equalTo(numberOfResultLabel.snp.bottom).offset(4)
+            make.width.equalTo(50)
+        }
+        
+        dateFilterButton.snp.makeConstraints { make in
+            make.leading.equalTo(accurateFilterButton.snp.trailing).offset(8)
+            make.top.equalTo(numberOfResultLabel.snp.bottom).offset(4)
+            make.width.equalTo(50)
+        }
+        
+        highPriceFilterButton.snp.makeConstraints { make in
+            make.leading.equalTo(dateFilterButton.snp.trailing).offset(8)
+            make.top.equalTo(numberOfResultLabel.snp.bottom).offset(4)
+            make.width.equalTo(70)
+        }
+        
+        lowPriceFilterButton.snp.makeConstraints { make in
+            make.leading.equalTo(highPriceFilterButton.snp.trailing).offset(8)
+            make.top.equalTo(numberOfResultLabel.snp.bottom).offset(4)
+            make.width.equalTo(70)
+        }
+        
+        searchResultCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(accurateFilterButton.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    
+    func configureNavigationBar(text: String) {
+        
+        setNavigation(text: text, backButton: true)
+    }
+    
+    func collectionViewLayout() -> UICollectionViewLayout {
         
         let spacing: CGFloat = 10
         let cellWidth = UIScreen.main.bounds.width - spacing * 3
@@ -171,14 +208,14 @@ extension SearchResultViewController {
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.itemSize = CGSize(width: cellWidth / 2 , height: cellHeight / 3)
         
-        searchResultCollectionView.collectionViewLayout = layout
-        
+        return layout
     }
     
     func configureSelectedFilterButton(button: UIButton, text: String) {
         
         button.setTitle(text, for: .normal)
         button.setTitleColor(.backgroundColor, for: .normal)
+        button.titleLabel?.font = .medium
         button.layer.cornerRadius = 8
         button.backgroundColor = .textColor
         button.layer.borderColor = UIColor.textColor.cgColor
@@ -189,6 +226,7 @@ extension SearchResultViewController {
         
         button.setTitle(text, for: .normal)
         button.setTitleColor(.textColor, for: .normal)
+        button.titleLabel?.font = .medium
         button.layer.cornerRadius = 8
         button.backgroundColor = .backgroundColor
         button.layer.borderColor = UIColor.textColor.cgColor
@@ -210,8 +248,10 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let item = shoppingList.items[indexPath.item]
         cell.configureCell(item: item)
         cell.favoriteButton.tag = Int(shoppingList.items[indexPath.item].productId)!
-        
         cell.favoriteButton.addTarget(self, action: #selector(changeFavoriteValue(sender:)), for: .touchUpInside)
+        DispatchQueue.main.async { //이게 최선인가..?
+            cell.favoriteButton.layer.cornerRadius = cell.favoriteButton.frame.width / 2
+        }
         
         if favoriteList.contains(item.productId) {
             cell.favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -236,12 +276,12 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         } else {
             
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
-            print(favoriteList)
+            
             guard let index = favoriteList.firstIndex(of: String(sender.tag)) else { return }
             var list = favoriteList
             list.remove(at: index)
             udManager.favoriteList = list
-            print(favoriteList)
+            
         }
     }
     

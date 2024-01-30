@@ -181,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="1960" y="727"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="c8j-lB-heM">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="qf2-YO-AR4" customClass="MainViewController" customModule="SeSAC4Recap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="qf2-YO-AR4" customClass="SearchViewController" customModule="SeSAC4Recap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xty-5t-znr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -304,28 +304,11 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="accurateFilterClicked:" destination="FHv-2C-0sp" eventType="touchUpInside" id="vTC-le-XLX"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5e-WA-xBw">
                                 <rect key="frame" x="66" y="91" width="50" height="30"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="dateFilterClicked:" destination="FHv-2C-0sp" eventType="touchUpInside" id="1v7-qd-pCs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOY-pb-BxF">
-                                <rect key="frame" x="124" y="91" width="70" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="NEY-a7-7eV"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="highpriceFilterClicked:" destination="FHv-2C-0sp" eventType="touchUpInside" id="akb-bK-vWa"/>
-                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nnK-3L-A0b">
                                 <rect key="frame" x="0.0" y="129" width="393" height="689"/>
@@ -378,9 +361,14 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="lowpriceFilterClicked:" destination="FHv-2C-0sp" eventType="touchUpInside" id="kiy-o5-cRU"/>
-                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOY-pb-BxF">
+                                <rect key="frame" x="124" y="91" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="NEY-a7-7eV"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="H7I-IU-UUS"/>
@@ -404,14 +392,6 @@
                             <constraint firstItem="xcA-uO-OBE" firstAttribute="top" secondItem="Ya1-oX-J2v" secondAttribute="bottom" constant="4" id="xPk-OT-dbV"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="accurateFilterButton" destination="xcA-uO-OBE" id="TQE-Bp-7BX"/>
-                        <outlet property="dateFilterButton" destination="p5e-WA-xBw" id="Mw7-rZ-hOd"/>
-                        <outlet property="highPriceFilterButton" destination="AOY-pb-BxF" id="bfq-gq-itc"/>
-                        <outlet property="lowPriceFilterButton" destination="Ex0-Oz-iRz" id="nj0-FB-Q8F"/>
-                        <outlet property="numberOfResultLabel" destination="Ya1-oX-J2v" id="Kag-DZ-8Y6"/>
-                        <outlet property="searchResultCollectionView" destination="nnK-3L-A0b" id="j44-nz-IIS"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7cv-rN-wNf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
