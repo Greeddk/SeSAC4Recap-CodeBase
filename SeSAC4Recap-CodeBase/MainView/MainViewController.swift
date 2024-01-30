@@ -6,15 +6,15 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet var userSearchBar: UISearchBar!
-    @IBOutlet var searchTableView: UITableView!
-    
-    @IBOutlet var headerBackView: UIView!
-    @IBOutlet var headerLabel: UILabel!
-    @IBOutlet var allClearButton: UIButton!
+    let userSearchBar = UISearchBar()
+    let headerBackView = UIView()
+    let headerLabel = UILabel()
+    let allClearButton = UIButton()
+    let searchTableView = UITableView()
     
     var udManager = UserDefaultsManager.shared
     
@@ -27,10 +27,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUI()
-        configureTableView()
-        configureTabBar()
-    
+        configureHierarchy()
+        configureView()
+        configureLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +48,6 @@ class MainViewController: UIViewController {
         
     }
     
-    
     @objc private func deleteButtonClicked(sender: UIButton) {
         
         var list = searchKeywords
@@ -61,19 +59,17 @@ class MainViewController: UIViewController {
     
 }
 
-extension MainViewController {
+extension MainViewController: CodeBaseProtocol {
     
-    private func configureTabBar() {
-        
-        tabBarController?.tabBar.tintColor = .point
-        tabBarController?.tabBar.backgroundColor = .backgroundColor
-        tabBarController?.tabBar.unselectedItemTintColor = .systemGray
-        
+    func configureHierarchy() {
+        view.addSubviews([userSearchBar, headerBackView, searchTableView])
+        headerBackView.addSubviews([headerLabel, allClearButton])
     }
     
-    private func setUI() {
+    func configureView() {
         
         setBackgroundColor()
+        configureTableView()
         
         headerBackView.backgroundColor = .clear
         
@@ -90,18 +86,47 @@ extension MainViewController {
         
         if searchKeywords.isEmpty {
             
-            headerLabel.textColor = .backgroundColor
-            
-            allClearButton.setTitleColor(.backgroundColor, for: .normal)
-            
-            
+            headerLabel.textColor = .textColor
+            allClearButton.setTitleColor(.point, for: .normal)
+
         } else {
             
-            headerLabel.textColor = .textColor
-            
-            allClearButton.setTitleColor(.point, for: .normal)
+            headerLabel.textColor = .backgroundColor
+            allClearButton.setTitleColor(.backgroundColor, for: .normal)
+        }
+    }
+    
+    func configureLayout() {
+        userSearchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(56)
         }
         
+        headerBackView.snp.makeConstraints { make in
+            make.top.equalTo(userSearchBar.snp.bottom)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(50)
+        }
+        
+        headerLabel.snp.makeConstraints { make in
+            make.leading.equalTo(headerBackView).offset(8)
+            make.trailing.equalTo(headerBackView).offset(70)
+            make.top.equalTo(headerBackView).offset(12)
+        }
+        
+        allClearButton.snp.makeConstraints { make in
+            make.width.equalTo(70)
+            make.height.equalTo(20)
+            make.trailing.equalTo(headerBackView.snp.trailing).offset(-8)
+            make.top.equalTo(headerLabel.snp.top).offset(-2)
+        }
+        
+        searchTableView.snp.makeConstraints { make in
+            make.top.equalTo(headerBackView.snp.bottom)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    
     }
     
     private func setSearchBar() {
@@ -114,21 +139,15 @@ extension MainViewController {
 
     }
     
-    private func configureTableView() {
+    func configureTableView() {
         
         searchTableView.delegate = self
         searchTableView.dataSource = self
-        searchTableView.backgroundColor = .backgroundColor
+        searchTableView.backgroundColor = .clear
         
-        let emptyViewXib = UINib(nibName: MainImageTableViewCell.identifier, bundle: nil)
-        
-        searchTableView.register(emptyViewXib, forCellReuseIdentifier: MainImageTableViewCell.identifier)
-        
-        let keywordViewXib = UINib(nibName: MainKeywordTableViewCell.identifier, bundle: nil)
-        
-        searchTableView.register(keywordViewXib, forCellReuseIdentifier: MainKeywordTableViewCell.identifier)
-        
-        
+        searchTableView.register(MainImageTableViewCell.self, forCellReuseIdentifier: MainImageTableViewCell.identifier)
+     
+        searchTableView.register(MainKeywordTableViewCell.self, forCellReuseIdentifier: MainKeywordTableViewCell.identifier)
     }
 }
 
@@ -190,8 +209,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.reloadRows(at: [indexPath], with: .fade)
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
-        
         var list = searchKeywords
         list.reverse()
         
@@ -199,6 +216,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   
         udManager.searchKeyword = text
         
+        let vc = SearchResultViewController()
         vc.configureNavigationBar(text: text)
         
         navigationController?.pushViewController(vc, animated: true)
@@ -217,10 +235,10 @@ extension MainViewController: UISearchBarDelegate {
         udManager.searchList = searchKeywords
         udManager.searchKeyword = text
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
+        SearchResultViewController().configureNavigationBar(text: text)
         
-        vc.configureNavigationBar(text: text)
-        
+        let sb = UIStoryboard(name: "main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier)
         navigationController?.pushViewController(vc, animated: true)
         
     }

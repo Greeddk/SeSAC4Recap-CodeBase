@@ -196,9 +196,6 @@
                                 </constraints>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="qf2-YO-AR4" id="n9Y-oj-fSV"/>
-                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8sT-zV-zp7">
                                 <rect key="frame" x="0.0" y="191" width="393" height="578"/>
@@ -250,13 +247,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dhS-NS-UbZ"/>
-                    <connections>
-                        <outlet property="allClearButton" destination="RMD-tA-Ab1" id="7gT-nR-Xef"/>
-                        <outlet property="headerBackView" destination="Uz7-D2-QmX" id="wDh-6u-FVv"/>
-                        <outlet property="headerLabel" destination="E3O-hV-LjE" id="TdI-nf-PhQ"/>
-                        <outlet property="searchTableView" destination="8sT-zV-zp7" id="w3y-fx-NbA"/>
-                        <outlet property="userSearchBar" destination="fCT-Db-5aE" id="hCB-oA-whp"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2P7-8s-E1c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -285,9 +275,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6sG-53-ttc"/>
-                    <connections>
-                        <outlet property="settingTableView" destination="UCC-IE-g2f" id="X9f-Hm-FSY"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRQ-ON-d8b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

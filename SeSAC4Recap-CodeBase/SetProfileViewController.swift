@@ -155,10 +155,7 @@ extension SetProfileViewController {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
                 
-                let sb = UIStoryboard(name: "main", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: tabBarName.mainTabBar.rawValue) as! UITabBarController
-                
-                sceneDelegate?.window?.rootViewController = vc
+                sceneDelegate?.window?.rootViewController = MainTabBarViewController()
                 sceneDelegate?.window?.makeKeyAndVisible()
                 
             }

@@ -28,10 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         } else {
             
-            let sb = UIStoryboard(name: storyboardName.main.rawValue, bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: tabBarName.mainTabBar.rawValue) as! UITabBarController
-            
-            window?.rootViewController = vc
+            window?.rootViewController = MainTabBarViewController()
             window?.makeKeyAndVisible()
             
         }

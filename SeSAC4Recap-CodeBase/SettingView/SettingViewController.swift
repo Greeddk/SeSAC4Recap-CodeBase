@@ -9,7 +9,7 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
-    @IBOutlet var settingTableView: UITableView!
+    let settingTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     let udManager = UserDefaultsManager.shared
     
@@ -25,8 +25,9 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUI()
-        setTableView()
+        configureHierarchy()
+        configureView()
+        configureLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,13 +41,22 @@ class SettingViewController: UIViewController {
 
 }
 
-extension SettingViewController {
+extension SettingViewController: CodeBaseProtocol {
     
-    private func setUI() {
-        
+    func configureHierarchy() {
+        view.addSubview(settingTableView)
+    }
+    
+    func configureView() {
         setBackgroundColor()
         setNavigation(text: "설정", backButton: false)
-        
+        setTableView()
+    }
+    
+    func configureLayout() {
+        settingTableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     private func setTableView() {
@@ -61,8 +71,7 @@ extension SettingViewController {
         let profileXib = UINib(nibName: SettingProfileTableViewCell.identifier, bundle: nil)
         settingTableView.register(profileXib, forCellReuseIdentifier: SettingProfileTableViewCell.identifier)
         
-        let optionXib = UINib(nibName: SettingOptionTableViewCell.identifier, bundle: nil)
-        settingTableView.register(optionXib, forCellReuseIdentifier: SettingOptionTableViewCell.identifier)
+        settingTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionTableViewCell")
         
     }
     
@@ -96,9 +105,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingOptionTableViewCell.identifier, for: indexPath) as! SettingOptionTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OptionTableViewCell", for: indexPath)
             
-            cell.configureCell(text: list[indexPath.row].rawValue)
+            cell.backgroundColor = .backViewColor
+            cell.textLabel?.text = list[indexPath.row].rawValue
+            cell.textLabel?.font = .small
+            cell.textLabel?.textColor = .systemGray4
             
             if indexPath.row != 4 {
                 cell.selectionStyle = .none
@@ -144,11 +156,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
-            
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: OnboardingViewController.identifier) as! OnboardingViewController
-            let nav = UINavigationController(rootViewController: vc)
-            
-            sceneDelegate?.window?.rootViewController = nav
+
+            sceneDelegate?.window?.rootViewController = UINavigationController(rootViewController: OnboardingViewController())
             sceneDelegate?.window?.makeKeyAndVisible()
             
         }
